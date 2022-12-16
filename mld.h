@@ -22,7 +22,7 @@ typedef enum{
 } data_type_t;
 
 #define OFFSETOF(struct_name, fld_name)		\
-	(unsigned int) & (((struct_name *)0)->fld_name)
+	(unsigned long)&(((struct_name *)0)->fld_name)
 
 #define FIELD_SIZE(struct_name, fld_name)		\
 	sizeof(((struct_name *)0)->fld_name)
@@ -40,7 +40,7 @@ typedef struct _field_info_{
 
 
 //Structure to store the information of one C structure which culd have 'n_fields' fields
-struct _struct_db_rec_t{
+struct _struct_db_rec_{
 	struct_db_rec_t *next;													//Pointer to the next structure in the linked list
 	char struct_name[MAX_STRUCTURE_NAME_SIZE];		//key
 	unsigned int ds_size;														//Size of structure
@@ -66,8 +66,7 @@ int add_structure_to_struct_db(struct_db_t *struct_db, struct_db_rec_t *struct_r
 
 //Structure Registration helping APIs
 #define FIELD_INFO(struct_name, fld_name, dtype,nested_str_name)	\
-	{
-		#fld_name, dtype, FIELD_SIZE(struct_name, fld_name),				\
+	{#fld_name, dtype, FIELD_SIZE(struct_name, fld_name),				\
 			OFFSETOF(struct_name, fld_name), #nested_str_name}
 
 #define REG_STRUCT(struct_db, st_name, fields_arr)							\
@@ -81,6 +80,6 @@ int add_structure_to_struct_db(struct_db_t *struct_db, struct_db_rec_t *struct_r
             assert(0);																				\
         }																								\
 	}while(0);
-}
+
 
 #endif //__MLD__

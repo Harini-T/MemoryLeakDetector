@@ -20,8 +20,8 @@ typedef struct student_{
 	unsigned int rollno;
 	unsigned int age;
 	float aggregate;
-	struct student_ *best_colleage'
-}strudent_t;
+	struct student_ *best_colleage;
+}student_t;
 
 
 int main(int argc, char **argv){
