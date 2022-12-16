@@ -37,6 +37,7 @@ int main(int argc, char **argv){
         FIELD_INFO(emp_t, mgr,      OBJ_PTR, emp_t),
         FIELD_INFO(emp_t, salary,   FLOAT, 0)
     };
+	//3. Register the structure in structure database
     REG_STRUCT(struct_db, emp_t, emp_fields);
 
     static field_info_t stud_fiels[] = {
@@ -48,7 +49,21 @@ int main(int argc, char **argv){
     };
     REG_STRUCT(struct_db, student_t, stud_fiels);
 
+	//Verify the correctness of structure database
     print_structure_db(struct_db);
+	
+	/*Working with object database*/
+    /*1 : Initialize a new Object database */
+    object_db_t *object_db = calloc(1, sizeof(object_db_t));
+    object_db->struct_db = struct_db;
+    
+    /*2 : Create some sample objects, equivalent to standard * calloc(1, sizeof(student_t))*/
+    student_t *abhishek = xcalloc(object_db, "student_t", 1);
+    student_t *shivani = xcalloc(object_db, "student_t", 1);
+    emp_t *joseph = xcalloc(object_db, "emp_t", 2);
+
+    print_object_db(object_db);
+	
     return 0;
 	
 }
