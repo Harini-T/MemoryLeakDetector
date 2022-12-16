@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "mld.h"
 #include "css.h"
+#include<string.h>
 
 char *DATA_TYPE[] = {"UINT8", "UINT32", "INT32",
                      "CHAR", "OBJ_PTR", "FLOAT",
